@@ -18,3 +18,20 @@
 
 
 # Handling Exceptions
+## Possible Erros
+1. the page is not found on the server (there was an error in retrieving it)
+ * 404 page not found
+ * 500 internal server error
+2. the server is not found
+3. html tags do not exist
+    * bs.None_object.tag: return AttributeError
+    * bs.exist_object.none_tag: reutrn None
+
+
+# Analyze websites
+> should not be a hammer to dig all tags and use them. The code is fragile when the structure of tags changes
+* look for a "print this page" or "html file" link
+* look for the information hidden in a JavaScript file
+* look for URL
+* use other alternative websites
+  * if no, the final way is to select tags by elegant methods: BeautifuleSoup
