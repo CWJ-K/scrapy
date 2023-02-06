@@ -116,3 +116,75 @@ Take Reference From [Web Scraping with Python, 2nd Edition](https://www.oreilly.
   scrapy startproject <project_name>
 
 ```
+
+## Run a spider
+```bash
+  scrapy runspider <file_name>
+
+  # produce output:
+  scrapy runspider <file_name> -o <file_name>.csv -t csv
+  scrapy runspider <file_name> -o <file_name>.json -t json
+  scrapy runspider <file_name> -o <file_name>.xml -t xml
+
+```
+
+## Selector
+* XPath
+  * retrieve text content including text in child tags
+    * e.g. <a>tag inside a block of text
+* CSS 
+  * all text within child tags will be ignored
+
+## Rule
+  |Arguments|Meaning|
+  |:---:|:---|
+  |link_extractor|e.g. LinkExtractor object|
+  |callback|function to parse the content on the page|
+  |cb_kwargs|a dictionary of arguments to passed to the callback function|
+  |follow|whether links found at the page to be included in a future crawl. default: True, if no callback function is provided. Fasle, if callback function is provided|
+
+### LinkExtractor
+* to recognize and return links in a page of HTML content based on the rules provided to it
+* accept or deny a link based on CSS and XPath selectors, tag, domains and more
+* Main arguments:
+  |Arguments|Meaning|
+  |allow|allow all links that match the provided regular expression|
+  |deny|deny all links that match the provided regular expression|
+
+
+# Item Pipeline
+* improve the speed of your web scraper by perfoming all data processing with waiting for requests to be returned, rather than 
+waiting for data to be processed before making another request
+  => asychronously
+
+* `settings.py`
+  ```python
+    # integer presents the order as multiple classes run in the pipeline
+    # the range of number typically used: 0-1000, run in ascending order
+    ITEM_PIPELINES = {
+      "wikiSpider.pipelines.WikispiderPipeline": 300,
+    }
+  
+  ```
+
+* In Spider, `parse_item`: must return Item object. The only goal is to extract the raw data, doing as little processing as possible
+  * tasks should be independent
+* In pipeline, `process_item`: mandatory method. Scrapy uses it to asynchronously pass Items that are collected by the spider
+
+## Note => Uncertain
+* Item-specific parsing may be better handled in the spider, before the data hits the pipeline
+* if the parsing takes a long time, you may want to consider moving it to the pipeline (where it can be processed asynchronously) and add a check on the item type 
+  ```python
+    def process_item(self, item, spider):
+      if isinstance(item, Article):
+        # Article-specific processing here
+  ```
+
+## Logging
+* `settings.py`: `LOG_LEVEL = 'ERROR'`
+
+* control logs from command line => unknow issue
+```python
+scrapy crawl <spider_name> -s LOG_FILE=<log_name>.log
+
+```

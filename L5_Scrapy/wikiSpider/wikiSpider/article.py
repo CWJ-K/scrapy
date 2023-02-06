@@ -14,7 +14,7 @@ class ArticleSpider(scrapy.Spider):
 
     def parse(self, response): # callback function
         url = response.url
-        title = response.css('h1::text').extract_first()
+        title = response.css('title:text').extract_first()
         print('URL is: {}'.format(url))
         print('Title is: {}'.format(title))
     
