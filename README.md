@@ -188,3 +188,34 @@ waiting for data to be processed before making another request
 scrapy crawl <spider_name> -s LOG_FILE=<log_name>.log
 
 ```
+
+# Scrape JavaScript
+* JavaScript manipulate the HTML and CSS to display websites
+## Common JavaScript Libraries
+### jQuery
+* identifiable: code contains an import to jQuery
+  ```javescript
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></scrip>
+  ```
+* Ajax and Dynamic HTML: dynamically creates HTML content that appears only after the JavaScript is executed
+  * traditional scraping method: retrieve only the preloaded page that appears before the JavaScript has created the content
+  * Ajax: Asynchronous JavaScript and XML
+    * send information to and receive it from a web server without making a separate page request
+      * e.g. fill forms, buttons
+    * Ajax is not a language but a group of technologies used to accomplish a certain task by front-end
+  
+### Google Analytics
+* cookies to track your vists from page to page
+* can be a problem for web scrapers that are designed to execute JavaScript and handle cookies, e.g. Selenium
+
+### DHTML
+* dynamic HTML 
+
+## Solutions
+1. scrape the content directly from the JavaScripts
+2. use Python packages execute the JavaScript
+   1. Selenium
+
+
+# Crawl through APIs
+* 
