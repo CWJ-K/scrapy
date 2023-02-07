@@ -213,9 +213,52 @@ scrapy crawl <spider_name> -s LOG_FILE=<log_name>.log
 
 ## Solutions
 1. scrape the content directly from the JavaScripts
+   1. APIs (??)
 2. use Python packages execute the JavaScript
    1. Selenium
 
 
 # Crawl through APIs
-* 
+* API
+  * define a standardized syntax that allows one piece of software to communicate with another piece of software, even if wriiten in different languages or other structured
+  * allow a Java Program to communicate with a Python program running on the same machine
+  * response from the API is usually returned in a JSON or XML format
+    * JSON is far more popular in modern times than XML
+      * JSON is lighter than XML
+      * JSON is easier to handle by modern server-side technologies, e.g. Angular or Backbone
+* ip-api.com easy-to-use and simple API that translates IP addressed to actual physical addresses
+  ```website
+    http://ip-api.com/xml/36.226.41.31
+    http://ip-api.com/csv/36.226.41.31
+  ```
+## Request information from a web server by HTTP
+* POST, PUT, DELETE requests allow users to send information in the body of request
+### GET
+* make no changes to the information in the server's database. Information is only read
+  > hey, web server, please retrieve/get me this information
+
+### POST
+* when users fill out a form or submit information, presumably to a backend script on the server, e.g. create a new user
+  > Please, store this information in your database
+### PUT
+* update an object or information, e.g. update the users' email address
+
+### DELETE
+* delete an object
+
+## Python Library
+### JSON
+* JSON parsing library
+* Python turns JSON objects into dictionaries, JSON arrays into lists, JSON strings into strings, and so forth
+  
+```python
+  import json
+  # transfer json objects into python objects
+  json_object = '{"id": 985, "Name": "aswe", "Email": "sdfer@example.com"}'
+  python_object = json.loads(str1)
+
+  #transfer python objects into json objects
+  python_object = {'id': 985, 'Name': 'aswe', 'Email': 'sdfer@example.com'}
+  json_object = json.dumps(j)
+
+```
