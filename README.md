@@ -262,3 +262,33 @@ scrapy crawl <spider_name> -s LOG_FILE=<log_name>.log
   json_object = json.dumps(j)
 
 ```
+
+# Avoid Scraping Traps
+1. change Heading
+* especially `User-Agent`, not using `Python-urllib/3.4` (default setting of Requests library)
+* mobile devices have lacking advertisements and distractions. Can use the heading of mobile devices to scrape webs
+
+2. handling cookies with JavaScript
+* EditThisCookie, a Chrome extension
+  
+3. Time
+* multithreaded programming  may be a terrible policy for writing good scrapers
+
+# Human Checklist
+1. If the page to be scraped is blank, missing information but information can be seen in the browser
+   > Ajax and Dynamic HTML
+
+2. Check the actual POST request sent on Chrome's Inspector panel to make sure all parameters are not missed
+
+3. If logging into a site and can not make the login "stick", or the website is experiencing other strange "state" behaviour.
+   > Check cookies being persisted correctly between each page load 
+
+4. get HTTP errors, e.g. 403 Forbidden errors. It may indicate that website has identified your IP address as a bot and is unwilling to accept any more requests
+   > 1. wait until your IP address is removed from the list
+   > 2. obtain a new IP address
+  * Avoid scraps being blocked
+     1. change headers
+        > copy your own browser's headers
+     2. Make sure not clicking on or accessing anything that a human normally would not be able to
+     3. contact web adminstratod. They may share their data
+
