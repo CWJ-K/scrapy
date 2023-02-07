@@ -131,7 +131,7 @@ Take Reference From [Web Scraping with Python, 2nd Edition](https://www.oreilly.
 ## Selector
 * XPath
   * retrieve text content including text in child tags
-    * e.g. <a>tag inside a block of text
+    * e.g. `<a> tag` inside a block of text
 * CSS 
   * all text within child tags will be ignored
 
